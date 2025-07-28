@@ -80,6 +80,7 @@
       font-size: 0.7rem;
       color: #999;
       margin-top: 6px;
+      line-height: 1.2rem;
     }
 
     .close-area {
@@ -131,9 +132,10 @@
       <div class="clickable" onclick="setDialogue(['먼지가 수북이 쌓여있다.'])">🚪</div>
       <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
 
-      <div class="clickable" onclick="setDialogue([getTodayDate() + ' 페이지가 펼쳐져 있다.', '누가 넘기고 있는 거지..?'])">📆</div>
+      <div class="clickable" onclick="setDialogue(['' + getTodayDate() + ' 페이지가 펼쳐져 있다.', '누가 넘기고 있는 거지..?'])">📆</div>
       <div class="clickable" onclick="setDialogue(['갈색의 브랜드 없는 오래된 브라운관 tv이다. 먼지는 한 톨도 없지만, 켜지지 않는다.', '잘 살펴보니, 콘센트의 흔적조차 보이지 않는다.'])">📺</div>
-      <div>📚</div><div></div><div></div><div></div><div></div><div></div><div></div>
+      <div class="clickable" onclick="setDialogue(['\'하얀방\'이라는 시리즈의 책들이 가득 쌓여있다.', '..7화 이후로는 온통 백지이다.'])">📚</div>
+      <div></div><div></div><div></div><div></div><div></div><div></div>
 
       <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
 
@@ -142,7 +144,9 @@
       <div class="clickable" onclick="setDialogue(['아무것도 쓰이지 않은, 그저 구겨져있을 뿐인 멀쩡한 종이 뭉치들이 들어있다.'])">🗑</div>
       <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
 
-      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div>🛏</div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+      <div class="clickable" onclick="setDialogue(['침구들이 가지런히 정리되어 있다.', '머리맡에 시집이 가득하다.'])">🛏</div>
+      <div></div>
 
       <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
     </div>
@@ -150,7 +154,10 @@
     <div id="dialogue" class="dialogue-box" onclick="nextLine()">
       ..뭉싯이의 집이다.
     </div>
-    <div class="hint-text">사물을 클릭하여 탐색하기</div>
+    <div class="hint-text">
+      사물을 클릭하여 탐색하기<br>
+      *해당 공간은 해피니스 도시 세계관과 관계 없는 개발자 공간임을 알려드립니다.
+    </div>
   </div>
 
   <script>
@@ -184,7 +191,7 @@
 
     function getTodayDate() {
       const today = new Date();
-      return `${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일`;
+      return `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
     }
 
     function getCurrentTime() {
