@@ -21,14 +21,24 @@
     }
     .city {
       padding: 50px 20px;
-      text-align: center;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 20px;
+      justify-items: center;
+      align-items: center;
       font-size: 2rem;
-      line-height: 2.5rem;
     }
     .building {
       color: #007BFF;
       text-decoration: underline;
       cursor: pointer;
+    }
+    .label {
+      font-size: 1rem;
+      margin-top: 5px;
+    }
+    .cell {
+      text-align: center;
     }
   </style>
 </head>
@@ -36,13 +46,34 @@
   <div class="title">해피니스 도시</div>
 
   <div class="city">
-    <div>🏡 집</div>
-    <div>🌳 공원</div>
-    <div><a href="#" class="building">🏢 병원</a></div>
-    <div><a href="#" class="building">🏬 마트</a></div>
-    <div>🚗 도로</div>
-    <div><a href="#" class="building">🏫 학교</a></div>
-    <div>👨‍👩‍👧‍👦 사람들</div>
+    <div class="cell">
+      <a href="#" class="building">🏡</a>
+      <div class="label">김뭉싯의 집</div>
+    </div>
+    <div class="cell">
+      <a href="#" class="building">🏢</a>
+      <div class="label">병원</div>
+    </div>
+    <div class="cell">
+      <a href="#" class="building">🏬</a>
+      <div class="label">마트</div>
+    </div>
+    <div class="cell">
+      🚗
+      <div class="label">도로</div>
+    </div>
+    <div class="cell">
+      <a href="#" class="building">🏫</a>
+      <div class="label">학교</div>
+    </div>
+    <div class="cell">
+      🌳
+      <div class="label">공원</div>
+    </div>
+    <div class="cell">
+      👨‍👩‍👧‍👦
+      <div class="label">사람들</div>
+    </div>
   </div>
 </body>
 </html>
