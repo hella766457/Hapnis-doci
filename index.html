@@ -8,8 +8,9 @@
     body {
       margin: 0;
       font-family: sans-serif;
-      background-color: #fdfdfd;
+      background-color: #fff;
       color: #333;
+      text-align: center;
     }
     .title {
       height: 100vh;
@@ -20,25 +21,22 @@
       font-weight: bold;
     }
     .city {
-      padding: 50px 20px;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-gap: 20px;
-      justify-items: center;
-      align-items: center;
-      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 60px 20px;
+      flex-wrap: wrap;
     }
     .building {
+      text-decoration: none;
       color: #007BFF;
-      text-decoration: underline;
-      cursor: pointer;
+    }
+    .building-block {
+      font-size: 3rem;
     }
     .label {
       font-size: 1rem;
       margin-top: 5px;
-    }
-    .cell {
-      text-align: center;
     }
   </style>
 </head>
@@ -46,33 +44,20 @@
   <div class="title">해피니스 도시</div>
 
   <div class="city">
-    <div class="cell">
-      <a href="#" class="building">🏡</a>
-      <div class="label">김뭉싯의 집</div>
+    <div class="building-block">
+      <a href="#" class="building">🏠<div class="label">김뭉싯의 집</div></a>
     </div>
-    <div class="cell">
-      <a href="#" class="building">🏢</a>
-      <div class="label">병원</div>
+    <div class="building-block">
+      <a href="#" class="building">🏬<div class="label">마트</div></a>
     </div>
-    <div class="cell">
-      <a href="#" class="building">🏬</a>
-      <div class="label">마트</div>
+    <div class="building-block">
+      <a href="#" class="building">🏥<div class="label">병원</div></a>
     </div>
-    <div class="cell">
-      🚗
-      <div class="label">도로</div>
+    <div class="building-block">
+      <a href="#" class="building">🏫<div class="label">학교</div></a>
     </div>
-    <div class="cell">
-      <a href="#" class="building">🏫</a>
-      <div class="label">학교</div>
-    </div>
-    <div class="cell">
-      🌳
-      <div class="label">공원</div>
-    </div>
-    <div class="cell">
-      👨‍👩‍👧‍👦
-      <div class="label">사람들</div>
+    <div class="building-block">
+      <a href="#" class="building">🏢<div class="label">어린이 정신병동</div></a>
     </div>
   </div>
 </body>
