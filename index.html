@@ -8,8 +8,7 @@
     body {
       margin: 0;
       font-family: sans-serif;
-      background-color: #fff;
-      color: #333;
+      background: #fff;
       text-align: center;
     }
     .title {
@@ -40,7 +39,6 @@
       margin-top: 5px;
     }
 
-    /* 팝업 스타일 */
     .popup {
       display: none;
       position: fixed;
@@ -55,10 +53,15 @@
       padding: 20px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
-    .room {
+    .grid-room {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      grid-template-rows: repeat(8, 3rem);
+      gap: 4px;
       font-size: 1.5rem;
-      white-space: pre;
       font-family: monospace;
+      justify-items: center;
+      align-items: center;
       margin-bottom: 20px;
     }
     .dialogue-box {
@@ -105,15 +108,25 @@
   <!-- 팝업 -->
   <div id="popup" class="popup">
     <div class="close-area" onclick="closePopup()">[닫기]</div>
-    <div class="room">
-📦
-🟫🟫🟫🟫🚪🟫🟫🟫🟫
-📚         📆 📺
-🕗          
-🗑        
-        🛏 
-🟫🟫🟫🟫🟫🟫🟫🟫🟫
+    <div class="grid-room">
+      <!-- 1행 -->
+      <div>📦</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+      <!-- 2행 -->
+      <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🚪</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
+      <!-- 3행 -->
+      <div>📚</div><div></div><div></div><div></div><div></div><div></div><div>📆</div><div>📺</div><div></div>
+      <!-- 4행 -->
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+      <!-- 5행 -->
+      <div>🕗</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+      <!-- 6행 -->
+      <div>🗑</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+      <!-- 7행 -->
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div>🛏</div><div></div>
+      <!-- 8행 -->
+      <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
     </div>
+
     <div id="dialogue" class="dialogue-box" onclick="nextLine()">
       ..뭉싯이의 집이다.
     </div>
