@@ -9,6 +9,7 @@
       margin: 0;
       font-family: sans-serif;
       background: #fff;
+      color: #333;
       text-align: center;
     }
     .title {
@@ -42,17 +43,17 @@
     .popup {
       display: none;
       position: fixed;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 600px;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       background: white;
-      border: 3px solid #333;
       z-index: 1000;
       padding: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      box-sizing: border-box;
+      overflow-y: auto;
     }
+
     .grid-room {
       display: grid;
       grid-template-columns: repeat(9, 1fr);
@@ -64,19 +65,33 @@
       align-items: center;
       margin-bottom: 20px;
     }
+
     .dialogue-box {
       background: black;
       color: white;
       padding: 15px;
       font-size: 1rem;
       cursor: pointer;
+      max-width: 600px;
+      margin: 0 auto;
     }
+
+    .hint-text {
+      font-size: 0.7rem;
+      color: #999;
+      margin-top: 6px;
+    }
+
     .close-area {
       text-align: right;
       font-size: 0.9rem;
       color: #888;
       cursor: pointer;
       margin-bottom: 10px;
+    }
+
+    .clickable {
+      cursor: pointer;
     }
   </style>
 </head>
@@ -109,33 +124,39 @@
   <div id="popup" class="popup">
     <div class="close-area" onclick="closePopup()">[닫기]</div>
     <div class="grid-room">
-      <!-- 1행 -->
-      <div>📦</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-      <!-- 2행 -->
-      <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🚪</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
-      <!-- 3행 -->
-      <div>📚</div><div></div><div></div><div></div><div></div><div></div><div>📆</div><div>📺</div><div></div>
-      <!-- 4행 -->
+      <div class="clickable" onclick="setDialogue(['빨간색 펜으로 크게 ‘환불’이라는 글자가 써있다.', '..이 도시에 환불이라는 개념이 있긴 했나..?'])">📦</div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+
+      <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
+      <div class="clickable" onclick="setDialogue(['먼지가 수북이 쌓여있다.'])">🚪</div>
+      <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
+
+      <div class="clickable" onclick="setDialogue([getTodayDate() + ' 페이지가 펼쳐져 있다.', '누가 넘기고 있는 거지..?'])">📆</div>
+      <div class="clickable" onclick="setDialogue(['갈색의 브랜드 없는 오래된 브라운관 tv이다. 먼지는 한 톨도 없지만, 켜지지 않는다.', '잘 살펴보니, 콘센트의 흔적조차 보이지 않는다.'])">📺</div>
+      <div>📚</div><div></div><div></div><div></div><div></div><div></div><div></div>
+
       <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-      <!-- 5행 -->
-      <div>🕗</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-      <!-- 6행 -->
-      <div>🗑</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-      <!-- 7행 -->
+
+      <div class="clickable" onclick="setDialogue([getCurrentTime()])">🕗</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+
+      <div class="clickable" onclick="setDialogue(['아무것도 쓰이지 않은, 그저 구겨져있을 뿐인 멀쩡한 종이 뭉치들이 들어있다.'])">🗑</div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+
       <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div>🛏</div><div></div>
-      <!-- 8행 -->
+
       <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
     </div>
 
     <div id="dialogue" class="dialogue-box" onclick="nextLine()">
       ..뭉싯이의 집이다.
     </div>
+    <div class="hint-text">사물을 클릭하여 탐색하기</div>
   </div>
 
   <script>
     const popup = document.getElementById("popup");
     const dialogue = document.getElementById("dialogue");
-    const lines = ["..뭉싯이의 집이다.", "오래 자리를 비운 듯 하다.."];
+    let lines = ["..뭉싯이의 집이다.", "오래 자리를 비운 듯 하다.."];
     let lineIndex = 0;
 
     function openPopup() {
@@ -152,9 +173,23 @@
       if (lineIndex < lines.length - 1) {
         lineIndex++;
         dialogue.innerText = lines[lineIndex];
-      } else {
-        closePopup();
       }
+    }
+
+    function setDialogue(newLines) {
+      lines = newLines;
+      lineIndex = 0;
+      dialogue.innerText = lines[0];
+    }
+
+    function getTodayDate() {
+      const today = new Date();
+      return `${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일`;
+    }
+
+    function getCurrentTime() {
+      const now = new Date();
+      return `${now.getHours()}시 ${now.getMinutes()}분 ${now.getSeconds()}초이다.`;
     }
   </script>
 </body>
