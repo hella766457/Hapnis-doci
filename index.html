@@ -30,6 +30,7 @@
     .building {
       text-decoration: none;
       color: #007BFF;
+      cursor: pointer;
     }
     .building-block {
       font-size: 3rem;
@@ -38,6 +39,42 @@
       font-size: 1rem;
       margin-top: 5px;
     }
+
+    /* 팝업 스타일 */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 600px;
+      background: white;
+      border: 3px solid #333;
+      z-index: 1000;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .room {
+      font-size: 1.5rem;
+      white-space: pre;
+      font-family: monospace;
+      margin-bottom: 20px;
+    }
+    .dialogue-box {
+      background: black;
+      color: white;
+      padding: 15px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .close-area {
+      text-align: right;
+      font-size: 0.9rem;
+      color: #888;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -45,20 +82,67 @@
 
   <div class="city">
     <div class="building-block">
-      <a href="#" class="building">🏠<div class="label">김뭉싯의 집</div></a>
+      <a href="#" class="building" onclick="openPopup()">
+        🏠<div class="label">김뭉싯의 집</div>
+      </a>
     </div>
     <div class="building-block">
       <a href="#" class="building">🏬<div class="label">마트</div></a>
     </div>
     <div class="building-block">
-      <a href="#" class="building">🏥<div class="label">병원</div></a>
-    </div>
-    <div class="building-block">
       <a href="#" class="building">🏫<div class="label">학교</div></a>
     </div>
     <div class="building-block">
-      <a href="#" class="building">🏢<div class="label">어린이 정신병동</div></a>
+      <a href="#" class="building" onclick="alert('접근 권한이 없습니다'); return false;">
+        🏢<div class="label">어린이 정신병동</div>
+      </a>
+    </div>
+    <div class="building-block">
+      <a href="#" class="building">👮<div class="label">경찰서</div></a>
     </div>
   </div>
+
+  <!-- 팝업 -->
+  <div id="popup" class="popup">
+    <div class="close-area" onclick="closePopup()">[닫기]</div>
+    <div class="room">
+📦
+🟫🟫🟫🟫🚪🟫🟫🟫🟫
+📚     📺   📆
+🕗          
+🗑        
+        🛏 
+🟫🟫🟫🟫🟫🟫🟫🟫🟫
+    </div>
+    <div id="dialogue" class="dialogue-box" onclick="nextLine()">
+      ..뭉싯이의 집이다.
+    </div>
+  </div>
+
+  <script>
+    const popup = document.getElementById("popup");
+    const dialogue = document.getElementById("dialogue");
+    const lines = ["..뭉싯이의 집이다.", "오래 자리를 비운 듯 하다.."];
+    let lineIndex = 0;
+
+    function openPopup() {
+      popup.style.display = "block";
+      lineIndex = 0;
+      dialogue.innerText = lines[lineIndex];
+    }
+
+    function closePopup() {
+      popup.style.display = "none";
+    }
+
+    function nextLine() {
+      if (lineIndex < lines.length - 1) {
+        lineIndex++;
+        dialogue.innerText = lines[lineIndex];
+      } else {
+        closePopup();
+      }
+    }
+  </script>
 </body>
 </html>
