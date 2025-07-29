@@ -1,203 +1,85 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>해피니스 도시</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>분실물 보관소</title>
   <style>
     body {
-      margin: 0;
       font-family: sans-serif;
-      background: #fff;
-      color: #333;
+      background: #f5f5f5;
       text-align: center;
-    }
-    .title {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 3rem;
-      font-weight: bold;
-    }
-    .city {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 60px 20px;
-      flex-wrap: wrap;
-    }
-    .building {
-      text-decoration: none;
-      color: #007BFF;
-      cursor: pointer;
-    }
-    .building-block {
-      font-size: 3rem;
-    }
-    .label {
-      font-size: 1rem;
-      margin-top: 5px;
-    }
-
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: white;
-      z-index: 1000;
+      margin: 0;
       padding: 20px;
-      box-sizing: border-box;
-      overflow-y: auto;
     }
-
-    .grid-room {
-      display: grid;
-      grid-template-columns: repeat(9, 1fr);
-      grid-template-rows: repeat(8, 3rem);
-      gap: 4px;
-      font-size: 1.5rem;
-      font-family: monospace;
-      justify-items: center;
-      align-items: center;
+    h1 {
       margin-bottom: 20px;
     }
-
-    .dialogue-box {
-      background: black;
-      color: white;
-      padding: 15px;
-      font-size: 1rem;
-      cursor: pointer;
-      max-width: 600px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(9, 3rem);
+      grid-template-rows: repeat(9, 3rem);
+      gap: 2px;
+      justify-content: center;
       margin: 0 auto;
     }
-
-    .hint-text {
-      font-size: 0.7rem;
-      color: #999;
-      margin-top: 6px;
-      line-height: 1.2rem;
-    }
-
-    .close-area {
-      text-align: right;
-      font-size: 0.9rem;
-      color: #888;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-
-    .clickable {
-      cursor: pointer;
+    .cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      background: white;
+      border: 1px solid #ccc;
     }
   </style>
 </head>
 <body>
-  <div class="title">해피니스 도시</div>
+  <h1>분실물 보관소</h1>
+  <div class="grid">
+    <!-- 1행: 윗벽 + 창문 -->
+    <div class="cell">🟫</div><div class="cell">🟫</div><div class="cell">🟫</div><div class="cell">🟫</div>
+    <div class="cell">🪟</div>
+    <div class="cell">🟫</div><div class="cell">🟫</div><div class="cell">🟫</div><div class="cell">🟫</div>
 
-  <div class="city">
-    <div class="building-block">
-      <a href="#" class="building" onclick="openPopup()">
-        🏠<div class="label">김뭉싯의 집</div>
-      </a>
-    </div>
-    <div class="building-block">
-      <a href="#" class="building">🏬<div class="label">마트</div></a>
-    </div>
-    <div class="building-block">
-      <a href="#" class="building">🏫<div class="label">학교</div></a>
-    </div>
-    <div class="building-block">
-      <a href="#" class="building" onclick="alert('접근 권한이 없습니다'); return false;">
-        🏢<div class="label">어린이 정신병동</div>
-      </a>
-    </div>
-    <div class="building-block">
-      <a href="#" class="building">👮<div class="label">경찰서</div></a>
-    </div>
+    <!-- 2행: 창 앞 오브젝트 -->
+    <div class="cell">🗑</div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell">🗄</div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+    <!-- 3행 -->
+    <div class="cell"></div><div class="cell"></div><div class="cell">🪪</div><div class="cell"></div>
+    <div class="cell">🧾</div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+    <!-- 4행 -->
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell">📦</div>
+    <div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell">🎧</div><div class="cell"></div>
+
+    <!-- 5행 -->
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell">🔑</div>
+    <div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell">🧍‍♂️</div>
+
+    <!-- 6행 -->
+    <div class="cell"></div><div class="cell">📎</div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell">🧤</div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+    <!-- 7행 -->
+    <div class="cell"></div><div class="cell"></div><div class="cell">💿</div><div class="cell"></div>
+    <div class="cell">📮</div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+    <!-- 8행: 아랫벽 (문 제외) -->
+    <div class="cell">🟫</div><div class="cell">🟫</div><div class="cell">🟫</div><div class="cell">🟫</div>
+    <div class="cell">🚪</div>
+    <div class="cell">🟫</div><div class="cell">🟫</div><div class="cell">🟫</div><div class="cell">🟫</div>
+
+    <!-- 9행: 바닥 -->
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
   </div>
-
-  <!-- 팝업 -->
-  <div id="popup" class="popup">
-    <div class="close-area" onclick="closePopup()">[닫기]</div>
-    <div class="grid-room">
-      <div class="clickable" onclick="setDialogue(['빨간색 펜으로 크게 ‘환불’이라는 글자가 써있다.', '..이 도시에 환불이라는 개념이 있긴 했나..?'])">📦</div>
-      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-
-      <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
-      <div class="clickable" onclick="setDialogue(['먼지가 수북이 쌓여있다.'])">🚪</div>
-      <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
-
-      <div class="clickable" onclick="setDialogue(['' + getTodayDate() + ' 페이지가 펼쳐져 있다.', '누가 넘기고 있는 거지..?'])">📆</div>
-      <div class="clickable" onclick="setDialogue(['갈색의 브랜드 없는 오래된 브라운관 tv이다. 먼지는 한 톨도 없지만, 켜지지 않는다.', '잘 살펴보니, 콘센트의 흔적조차 보이지 않는다.'])">📺</div>
-      <div class="clickable" onclick="setDialogue(['\'하얀방\'이라는 시리즈의 책들이 가득 쌓여있다.', '..7화 이후로는 온통 백지이다.'])">📚</div>
-      <div></div><div></div><div></div><div></div><div></div><div></div>
-
-      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-
-      <div class="clickable" onclick="setDialogue([getCurrentTime()])">🕗</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-
-      <div class="clickable" onclick="setDialogue(['아무것도 쓰이지 않은, 그저 구겨져있을 뿐인 멀쩡한 종이 뭉치들이 들어있다.'])">🗑</div>
-      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-
-      <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-      <div class="clickable" onclick="setDialogue(['침구들이 가지런히 정리되어 있다.', '머리맡에 시집이 가득하다.'])">🛏</div>
-      <div></div>
-
-      <div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div><div>🟫</div>
-    </div>
-
-    <div id="dialogue" class="dialogue-box" onclick="nextLine()">
-      ..뭉싯이의 집이다.
-    </div>
-    <div class="hint-text">
-      사물을 클릭하여 탐색하기<br>
-      *해당 공간은 해피니스 도시 세계관과 관계 없는 개발자 공간임을 알려드립니다.
-    </div>
-  </div>
-
-  <script>
-    const popup = document.getElementById("popup");
-    const dialogue = document.getElementById("dialogue");
-    let lines = ["..뭉싯이의 집이다.", "오래 자리를 비운 듯 하다.."];
-    let lineIndex = 0;
-
-    function openPopup() {
-      popup.style.display = "block";
-      lineIndex = 0;
-      dialogue.innerText = lines[lineIndex];
-    }
-
-    function closePopup() {
-      popup.style.display = "none";
-    }
-
-    function nextLine() {
-      if (lineIndex < lines.length - 1) {
-        lineIndex++;
-        dialogue.innerText = lines[lineIndex];
-      }
-    }
-
-    function setDialogue(newLines) {
-      lines = newLines;
-      lineIndex = 0;
-      dialogue.innerText = lines[0];
-    }
-
-    function getTodayDate() {
-      const today = new Date();
-      return `${today.getFullYear()}년 ${today.getMonth() + 1}월 ${today.getDate()}일`;
-    }
-
-    function getCurrentTime() {
-      const now = new Date();
-      return `${now.getHours()}시 ${now.getMinutes()}분 ${now.getSeconds()}초이다.`;
-    }
-  </script>
 </body>
 </html>
